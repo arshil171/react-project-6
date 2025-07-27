@@ -19,8 +19,9 @@ header.scrolled{
 }
 header .logo{
    /* font-family: cursive; */
-    font-size: 35px;
+    font-size: 36px;
     color: #fff;
+
     letter-spacing: 2px;
     font-weight: 800;
     text-decoration: none;

@@ -14,10 +14,10 @@ const Header = () => {
                 {
                     navList.map(nav=>(
 
-                       <NavListitem key={nav._id} nav ={nav}/>
-                    ))
+                         <NavListitem key={nav._id} nav ={nav}/>
+                    ))   
                 }
-            </ul>
+            </ul>    
             <div className="userItems">
                 <a href="#" className="icon">
                  <i> <FaHeart /></i>

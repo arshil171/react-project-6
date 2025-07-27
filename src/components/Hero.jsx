@@ -14,7 +14,7 @@ const Hero = () => {
           return (
             <div className="item">
               <img src={item.bgImg} alt="" className={`bgImg ${item.active ? "active" :undefined}`} />
-              <div  className={`content ${item.active ? "active" :undefined}`}>
+              <div  className={`content ${item.    active ? "active" :undefined}`}>
                 <div className='
                 line'>________</div>
               <p className='para'>{item.subtitle}</p>

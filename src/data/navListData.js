@@ -22,7 +22,7 @@ const navListData = [
         current: 'mens',
         next: 'footer',
         active: false,
-    },
+    },    
 ]
 
 export default navListData;

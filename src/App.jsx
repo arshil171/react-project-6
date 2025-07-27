@@ -14,7 +14,7 @@ const App = () => {
 
   }
   useEffect(() => {
-    handleData()
+    handleData()  
 
   }, [])
 

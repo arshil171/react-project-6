@@ -7,4 +7,4 @@ const NavListitem = ({nav}) => {
   )
 }
 
-export default NavListitem
+export default NavListitem  

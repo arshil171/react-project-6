@@ -1,6 +1,6 @@
 import "./itemDetail.css";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { data, useParams } from "react-router-dom";
 import axios from "axios";
 
 const ItemDetails = () => {
@@ -37,6 +37,8 @@ const ItemDetails = () => {
     },
   ];
   const [sizes, setSizes] = useState(sizeList);
+  const [qty , setQty] = useState(1)
+  const [itemAdded  , setItemAdded] = useState({...item , qty:1, size:'M'})
 
   const handleSizeChange = (id) => {
     const newSizeList = sizes.map((size) => {
@@ -49,13 +51,37 @@ const ItemDetails = () => {
     });
     setSizes(newSizeList)
   };
-
+   
+ const incQty = ()=>{
+  if(qty > 90){
+    setQty(99)
+    return
+  }
+  setQty(qty +1)
+  // setItemAdded({...setItemAdded , qty : qty +1})
+ }
+  
+ const decQty = ()=>{
+  if(qty < 2){
+    setQty(1)
+    return
+  }
+  setQty(qty - 1)
+  // setItemAdded({...itemAdded , qty :qty -1})
+ }
+  
+ const handleAddToBag = item =>{
+  console.log(item)
+ }
+ 
   useEffect(() => {
     async function fetchData() {
       try {
         const res = await axios.get(`http://localhost:3000/items?_id=${id}`);
         if (res.data.length === 0) throw new Error("Not found");
         setItem(res.data[0]);
+        // setItem(data[index])
+        // setItemAdded({...data[index] , qty:1 ,size:'M'})
         setLoading(false);
       } catch (err) {
         setError("Item not found or API error");
@@ -73,21 +99,21 @@ const ItemDetails = () => {
     <div className="itemDetails">
       <div className="content">
         <div className="container-fluid">
-          <div className="row p-5">
+          <div className="row1 p-5">
             <div className="col-lg-2">
               <div className="row">
-                <div className="col">
-                  <div className="itemPreview"></div>
+                <div className="col ">
+                  <div className="itemPreview "></div>
                   <div className="itemPreview"></div>
                   <div className="itemPreview"></div>
                   <div className="itemPreview"></div>
                 </div>
               </div>
             </div>
-            <div className="col-lg-5">
+            <div className="col-lg-5 col-img">
               <img src={item.bgImg} className="img-fluid itemImg" alt="" />
             </div>
-            <div className="col-lg-5">
+            <div className="col-lg-5 ">
               <h2>{item.title}</h2>
               <div className="itemPrice">
                 <h4 className="price">
@@ -103,23 +129,35 @@ const ItemDetails = () => {
                     </h4>
                   </>
                 )}
-                <h4>Details</h4>
-                <p>{item.description}</p>
-                <h4>Size</h4>
-                <div className="size">
-                  {
-                    sizes.map(size =>(
-                      <span key={size.id}
-                      onClick={()=>handleSizeChange(size.id)}
-                      className={`sizeItem ${
-                        size.active ? 'active' :undefined
-                      }`}>
-                       {size.name}
-                      </span>
-                    ))
-                  }
-                </div>
+
               </div>
+              <h4>Details</h4>
+              <p className="desc">{item.description}</p>
+              <h4>Size</h4>
+              <div className="size">
+                {
+                  sizes.map(size => (
+                    <span key={size.id}
+                      onClick={() => handleSizeChange(size.id)}
+                      className={`sizeItem ${size.active ? 'active' : undefined
+                        }`}>
+                      {size.name}
+                    </span>
+                  ))
+                }
+              </div>
+              <h4>Quantity</h4>
+              <div className="quantity">
+                <a href="#" className="qtyButton" onClick={decQty}>
+                     <i>-</i>
+                </a>
+                <a href="#"className="qtyButton"onClick={incQty} >
+                  <i>+</i>
+                </a>
+              </div>
+              <a href="#" className="addButton me-3" onClick={()=>{handleAddToBag(itemAdded)}}>
+                Add to Bag
+              </a>
             </div>
           </div>
         </div>

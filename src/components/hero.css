@@ -43,6 +43,7 @@
     object-position: center;
     visibility: hidden;
     opacity: 0;
+    /* display: none; */
     transform: scale(0);
     transition: 1s;
 }
@@ -50,6 +51,7 @@
 .bgImg.active {
     visibility: visible;
     opacity: 1;
+    /* display: block; */
     transform: scale(1);
 }
 
@@ -90,6 +92,7 @@
     position: relative;
     bottom: 30px;
     color: white;
+    border-radius: 3px;
     background-color: red;
     display: flex;
     justify-content: center;
@@ -109,10 +112,20 @@
     position: absolute;
     left: 65%;
     font-size: 18px;
+    transition: 0.4s;
+}
+.mainButton:hover i{
+    position: absolute;
+    left:75% ;
+    
 }
 .markButton{
     color: #fff;
     font-size: 40px;
+    transition: 0.3s;
+}
+.markButton:hover{
+    color: red;
 }
 .subtitle .slogan1{
     color: #fff;
@@ -120,6 +133,7 @@
     bottom: 110px;
     right: 210px;
     font-size:30px ;
+    
 }
 .line2 {
     color: red;
@@ -129,7 +143,11 @@
     bottom: 96px;
     right: 280px;
 }
-.number{
+.subtitle .number{
     color: red;
-    font-size: 40px;   
+    font-size: 40px;  
+    position: relative; 
+    bottom: 100px;
+    right: 180px;
+    font-size: 50px;
 }

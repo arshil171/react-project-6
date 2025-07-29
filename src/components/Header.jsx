@@ -9,7 +9,7 @@ const Header = () => {
     const [navList , setNavList]= useState(navListData)
     return (
         <header>
-            <a href="#" className="logo font-cursive "><img className='w-[90px]' src="../images/logo.png" alt="" /></a>
+            <a href="#" className="logo font-cursive ">Fashion</a>
             <ul className="nav">
                 {
                     navList.map(nav=>(

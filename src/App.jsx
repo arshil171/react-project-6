@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Header from './components/Header'
 import Home from './pages/Home'
 import axios from 'axios';
+import { Route, Routes } from 'react-router';
+import ItemDetails from './pages/ItemDetails';
 
 export const AppContext = React.createContext();
 
@@ -21,8 +23,13 @@ const App = () => {
   return (
     <>
       <AppContext.Provider value={{getData ,setGetData}}>
-        <Header />
-        <Home />
+         <Header />
+        <Routes>
+          <Route path='/' element={<Home />}/>
+          <Route path='items/:id' element={<ItemDetails/>}/>
+        </Routes>
+       
+        
       </AppContext.Provider>
 
     </>

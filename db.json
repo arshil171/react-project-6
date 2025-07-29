@@ -104,5 +104,20 @@
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi commodo felis tempor augue tristique, eget dignissim sapien ornare. Nullam vel hendrerit metus, a interdum risus. Etiam commodo lorem arcu, a tempus risus tempus sed. Proin ornare nec massa eget rhoncus. In rutrum aliquet dui, et placerat est molestie id.",
       "active": false
     }
+  ],
+  "ItemDetail" :[
+   {
+      "_id": 1,
+      "bgImg": "../images/fashion-1.jpg",
+      "title": "LOREM IPSUM DOLOR SIT AMET",
+      "subtitle": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, dolore",
+      "category": "SPRING",
+      "promotion": "HOT",
+      "gender": "women",
+      "price": 100.36,
+      "discount": 0.5,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi commodo felis tempor augue tristique, eget dignissim sapien ornare. Nullam vel hendrerit metus, a interdum risus. Etiam commodo lorem arcu, a tempus risus tempus sed. Proin ornare nec massa eget rhoncus. In rutrum aliquet dui, et placerat est molestie id.",
+      "active": true
+    }
   ]
 }

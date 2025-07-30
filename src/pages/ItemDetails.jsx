@@ -1,164 +1,154 @@
-import "./itemDetail.css";
 import { useState, useEffect } from "react";
-import { data, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
 const ItemDetails = () => {
   const [item, setItem] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { id } = useParams(); // id is a string
+  const { id } = useParams();
 
   const sizeList = [
-    {
-      id: 1,
-      name: "XS",
-      active: false,
-    },
-    {
-      id: 2,
-      name: "S",
-      active: false,
-    },
-    {
-      id: 3,
-      name: "M",
-      active: true,
-    },
-    {
-      id: 4,
-      name: "L",
-      active: false,
-    },
-    {
-      id: 5,
-      name: "XL",
-      active: false,
-    },
+    { id: 1, name: "XS", active: false },
+    { id: 2, name: "S", active: false },
+    { id: 3, name: "M", active: true },
+    { id: 4, name: "L", active: false },
+    { id: 5, name: "XL", active: false },
   ];
   const [sizes, setSizes] = useState(sizeList);
-  const [qty , setQty] = useState(1)
-  const [itemAdded  , setItemAdded] = useState({...item , qty:1, size:'M'})
+  const [qty, setQty] = useState(1);
+  const [itemAdded, setItemAdded] = useState(null);
 
   const handleSizeChange = (id) => {
-    const newSizeList = sizes.map((size) => {
-      sizeList.active = FlatESLint;
-      if (sizeList.id === id) {
-        sizeList.active = true;
-        // setItemAdded({ ...itemAdded, size: size.name });
-      }
-      return size;
-    });
-    setSizes(newSizeList)
+    const updatedSizes = sizes.map((size) => ({
+      ...size,
+      active: size.id === id,
+    }));
+    setSizes(updatedSizes);
+
+    const selectedSize = updatedSizes.find((s) => s.active);
+    setItemAdded({ ...item, qty, size: selectedSize.name });
   };
-   
- const incQty = ()=>{
-  if(qty > 90){
-    setQty(99)
-    return
-  }
-  setQty(qty +1)
-  // setItemAdded({...setItemAdded , qty : qty +1})
- }
-  
- const decQty = ()=>{
-  if(qty < 2){
-    setQty(1)
-    return
-  }
-  setQty(qty - 1)
-  // setItemAdded({...itemAdded , qty :qty -1})
- }
-  
- const handleAddToBag = item =>{
-  console.log(item)
- }
- 
+
+  const incQty = () => {
+    const newQty = qty >= 99 ? 99 : qty + 1;
+    setQty(newQty);
+    if (item) setItemAdded({ ...item, qty: newQty });
+  };
+
+  const decQty = () => {
+    const newQty = qty <= 1 ? 1 : qty - 1;
+    setQty(newQty);
+    if (item) setItemAdded({ ...item, qty: newQty });
+  };
+
+  const handleAddToBag = () => {
+    console.log(itemAdded);
+  };
+
   useEffect(() => {
     async function fetchData() {
       try {
         const res = await axios.get(`http://localhost:3000/items?_id=${id}`);
         if (res.data.length === 0) throw new Error("Not found");
         setItem(res.data[0]);
-        // setItem(data[index])
-        // setItemAdded({...data[index] , qty:1 ,size:'M'})
+        setItemAdded({ ...res.data[0], qty: 1, size: "M" });
         setLoading(false);
       } catch (err) {
         setError("Item not found or API error");
         setLoading(false);
       }
     }
-
     fetchData();
   }, [id]);
 
-  if (loading) return <div>Loading item details...</div>;
-  if (error) return <div style={{ color: "red" }}>{error}</div>;
+  if (loading)
+    return <div className="p-10 text-center text-lg text-gray-500">Loading...</div>;
+  if (error)
+    return <div className="p-10 text-center text-red-600">{error}</div>;
 
   return (
-    <div className="itemDetails">
-      <div className="content">
-        <div className="container-fluid">
-          <div className="row1 p-5">
-            <div className="col-lg-2">
-              <div className="row">
-                <div className="col ">
-                  <div className="itemPreview "></div>
-                  <div className="itemPreview"></div>
-                  <div className="itemPreview"></div>
-                  <div className="itemPreview"></div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-5 col-img">
-              <img src={item.bgImg} className="img-fluid itemImg" alt="" />
-            </div>
-            <div className="col-lg-5 ">
-              <h2>{item.title}</h2>
-              <div className="itemPrice">
-                <h4 className="price">
-                  Price :${item.price}
-                </h4>
-                {item.discount !== 0 && (
-                  <>
-                    <h4 className="discount">
-                      <i>{item.discount * 100}% OFF</i>
-                    </h4>
-                    <h4 className="currentPrice">
-                      Now :${((1 - item.discount) * item.price).toFixed(2)}
-                    </h4>
-                  </>
-                )}
+    <div className="w-[100%] h-[100vh] flex justify-center items-center relative top-[65px]">
+      <div className="p-8 w-[90%] h-[80vh] rounded-[15px] bg-gray-50  ">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-10">
+          {/* Previews */}
+          <div className="w-[200px] h-[585px] flex flex-col justify-center items-center gap-4">
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="w-[150px]  h-28 bg-gray-200 rounded-md"></div>
+            ))}
+          </div>
 
-              </div>
-              <h4>Details</h4>
-              <p className="desc">{item.description}</p>
-              <h4>Size</h4>
-              <div className="size">
-                {
-                  sizes.map(size => (
-                    <span key={size.id}
-                      onClick={() => handleSizeChange(size.id)}
-                      className={`sizeItem ${size.active ? 'active' : undefined
-                        }`}>
-                      {size.name}
-                    </span>
-                  ))
-                }
-              </div>
-              <h4>Quantity</h4>
-              <div className="quantity">
-                <a href="#" className="qtyButton" onClick={decQty}>
-                     <i>-</i>
-                </a>
-                <a href="#"className="qtyButton"onClick={incQty} >
-                  <i>+</i>
-                </a>
-              </div>
-              <a href="#" className="addButton me-3" onClick={()=>{handleAddToBag(itemAdded)}}>
-                Add to Bag
-              </a>
+          {/* Main Image */}
+          <div className="flex relative right-[200px] justify-center items-center">
+            <img src={item.bgImg} alt={item.title} className="w-full rounded-md shadow-md" />
+          </div>
+
+          {/* Info Section */}
+          <div className="w-[600px] flex flex-col justify-center  relative right-[200px] bg-black">
+            <h2 className="text-4xl absolute top-[15px] bg-black font-bold">{item.title}</h2>
+
+            <div className="text-lg space-y-2 absolute top-[70px]">
+              <p className="text-gray-500 ">Price :- ${item.price}</p>
+              {/* {item.discount > 0 && (
+                <>
+                  <p className=" font-semibold">
+                    {item.discount * 100}% OFF
+                  </p>
+                  <p className="text-xl font-bold">
+                    Now: ${(item.price * (1 - item.discount)).toFixed(2)}
+                  </p>
+                </>
+              )} */}
             </div>
+
+            <div className="absolute top-[110px]">
+              <h4 className="text-lg font-semibold mb-1">Details</h4>
+              <p className="text-gray-700">{item.description}</p>
+            </div>
+
+            <div className="absolute top-[250px]">
+              <h4 className="text-lg font-semibold mb-2">Size</h4>
+              <div className="flex gap-3  absolute ">
+                {sizes.map((size) => (
+                  <button
+                    key={size.id}
+                    onClick={() => handleSizeChange(size.id)}
+                    className={`px-4 relative top-[10px] w-[60px] h-[60px] py-2 rounded-full border ${size.active
+                        ? "bg-blue-600 text-white border-blue-600"
+                        : "bg-white text-gray-600 border-gray-400"
+                      }`}
+                  >
+                    {size.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="absolute bottom-[150px]" >
+              <h4 className="text-lg font-semibold mb-2">Quantity</h4>
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={decQty}
+                  className="bg-gray-300 w-[30px] h-[30px] hover:bg-gray-400 text-lg px-3 py-1 rounded"
+                >
+                  −
+                </button>
+                <span className="text-xl text-gray-400">{qty}</span>
+                <button
+                  onClick={incQty}
+                  className="bg-gray-300 w-[30px] h-[30px] hover:bg-gray-400 text-lg px-3 py-1 rounded"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <button
+              onClick={handleAddToBag}
+              className="mt-4 absolute bottom-[70px] w-[200px] h-[40px] px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
+            >
+              Add to Bag
+            </button>
           </div>
         </div>
       </div>

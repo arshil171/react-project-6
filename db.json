@@ -11,7 +11,8 @@
       "price": 100.36,
       "discount": 0.5,
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi commodo felis tempor augue tristique, eget dignissim sapien ornare. Nullam vel hendrerit metus, a interdum risus. Etiam commodo lorem arcu, a tempus risus tempus sed. Proin ornare nec massa eget rhoncus. In rutrum aliquet dui, et placerat est molestie id.",
-      "active": true
+      "active": true,
+      "id": "99fa"
     },
     {
       "_id": 2,
@@ -24,7 +25,8 @@
       "price": 120.76,
       "discount": 0.2,
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi commodo felis tempor augue tristique, eget dignissim sapien ornare. Nullam vel hendrerit metus, a interdum risus. Etiam commodo lorem arcu, a tempus risus tempus sed. Proin ornare nec massa eget rhoncus. In rutrum aliquet dui, et placerat est molestie id.",
-      "active": false
+      "active": false,
+      "id": "b127"
     },
     {
       "_id": 3,
@@ -37,7 +39,8 @@
       "price": 180.98,
       "discount": 0,
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi commodo felis tempor augue tristique, eget dignissim sapien ornare. Nullam vel hendrerit metus, a interdum risus. Etiam commodo lorem arcu, a tempus risus tempus sed. Proin ornare nec massa eget rhoncus. In rutrum aliquet dui, et placerat est molestie id.",
-      "active": false
+      "active": false,
+      "id": "d329"
     },
     {
       "_id": 4,
@@ -50,7 +53,8 @@
       "price": 100.36,
       "discount": 0.1,
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi commodo felis tempor augue tristique, eget dignissim sapien ornare. Nullam vel hendrerit metus, a interdum risus. Etiam commodo lorem arcu, a tempus risus tempus sed. Proin ornare nec massa eget rhoncus. In rutrum aliquet dui, et placerat est molestie id.",
-      "active": false
+      "active": false,
+      "id": "af71"
     },
     {
       "_id": 5,
@@ -63,7 +67,8 @@
       "price": 1068.26,
       "discount": 0.2,
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi commodo felis tempor augue tristique, eget dignissim sapien ornare. Nullam vel hendrerit metus, a interdum risus. Etiam commodo lorem arcu, a tempus risus tempus sed. Proin ornare nec massa eget rhoncus. In rutrum aliquet dui, et placerat est molestie id.",
-      "active": false
+      "active": false,
+      "id": "2c83"
     },
     {
       "_id": 6,
@@ -76,7 +81,8 @@
       "price": 754.12,
       "discount": 0,
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi commodo felis tempor augue tristique, eget dignissim sapien ornare. Nullam vel hendrerit metus, a interdum risus. Etiam commodo lorem arcu, a tempus risus tempus sed. Proin ornare nec massa eget rhoncus. In rutrum aliquet dui, et placerat est molestie id.",
-      "active": false
+      "active": false,
+      "id": "eff0"
     },
     {
       "_id": 7,
@@ -89,7 +95,8 @@
       "price": 482.99,
       "discount": 0.05,
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi commodo felis tempor augue tristique, eget dignissim sapien ornare. Nullam vel hendrerit metus, a interdum risus. Etiam commodo lorem arcu, a tempus risus tempus sed. Proin ornare nec massa eget rhoncus. In rutrum aliquet dui, et placerat est molestie id.",
-      "active": false
+      "active": false,
+      "id": "4fa8"
     },
     {
       "_id": 8,
@@ -102,12 +109,26 @@
       "price": 197.56,
       "discount": 0.1,
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi commodo felis tempor augue tristique, eget dignissim sapien ornare. Nullam vel hendrerit metus, a interdum risus. Etiam commodo lorem arcu, a tempus risus tempus sed. Proin ornare nec massa eget rhoncus. In rutrum aliquet dui, et placerat est molestie id.",
-      "active": false
+      "active": false,
+      "id": "11c3"
     }
   ],
-  "ItemDetail" :[
-   {
-      "_id": 1,
+  "Bag": [
+    {
+      "id": "b127",
+      "bgImg": "../images/fashion-2.jpg",
+      "title": "LOREM IPSUM DOLOR SIT AMET",
+      "subtitle": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, dolore",
+      "category": "SPRING",
+      "promotion": "HOT",
+      "gender": "women",
+      "price": 120.76,
+      "discount": 0.2,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi commodo felis tempor augue tristique, eget dignissim sapien ornare. Nullam vel hendrerit metus, a interdum risus. Etiam commodo lorem arcu, a tempus risus tempus sed. Proin ornare nec massa eget rhoncus. In rutrum aliquet dui, et placerat est molestie id.",
+      "active": false
+    },
+    {
+      "id": "99fa",
       "bgImg": "../images/fashion-1.jpg",
       "title": "LOREM IPSUM DOLOR SIT AMET",
       "subtitle": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, dolore",
@@ -117,7 +138,25 @@
       "price": 100.36,
       "discount": 0.5,
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi commodo felis tempor augue tristique, eget dignissim sapien ornare. Nullam vel hendrerit metus, a interdum risus. Etiam commodo lorem arcu, a tempus risus tempus sed. Proin ornare nec massa eget rhoncus. In rutrum aliquet dui, et placerat est molestie id.",
-      "active": true
+      "active": true,
+      "qty": 1,
+      "size": "M"
+    },
+    {
+      "id": "b127",
+      "_id": 2,
+      "bgImg": "../images/fashion-2.jpg",
+      "title": "LOREM IPSUM DOLOR SIT AMET",
+      "subtitle": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, dolore",
+      "category": "SPRING",
+      "promotion": "HOT",
+      "gender": "women",
+      "price": 120.76,
+      "discount": 0.2,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi commodo felis tempor augue tristique, eget dignissim sapien ornare. Nullam vel hendrerit metus, a interdum risus. Etiam commodo lorem arcu, a tempus risus tempus sed. Proin ornare nec massa eget rhoncus. In rutrum aliquet dui, et placerat est molestie id.",
+      "active": false,
+      "qty": 1,
+      "size": "M"
     }
   ]
 }

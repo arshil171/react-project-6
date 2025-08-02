@@ -8,6 +8,7 @@
     height: 40vh;
 
     transform: translateX(-50%);
+    transition: 1s;
     background: transparent;
     /* background-color: aqua; */
 }

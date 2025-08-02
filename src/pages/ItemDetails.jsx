@@ -1,13 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { AppContext } from "../App";
 
 const ItemDetails = () => {
+  const { bag, setBag } = useContext(AppContext)
   const [item, setItem] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { id } = useParams();
-
+   
   const sizeList = [
     { id: 1, name: "XS", active: false },
     { id: 2, name: "S", active: false },
@@ -15,10 +17,13 @@ const ItemDetails = () => {
     { id: 4, name: "L", active: false },
     { id: 5, name: "XL", active: false },
   ];
+  
   const [sizes, setSizes] = useState(sizeList);
   const [qty, setQty] = useState(1);
   const [itemAdded, setItemAdded] = useState(null);
 
+
+     
   const handleSizeChange = (id) => {
     const updatedSizes = sizes.map((size) => ({
       ...size,
@@ -42,9 +47,13 @@ const ItemDetails = () => {
     if (item) setItemAdded({ ...item, qty: newQty });
   };
 
-  const handleAddToBag = () => {
-    console.log(itemAdded);
-  };
+ 
+ const handleAddToBag = item =>{
+  console.log(item)
+   if(bag.includes(item)) return;
+   setBag([...bag , item])
+   alert("product successfully added in the cart")
+ }
 
   useEffect(() => {
     async function fetchData() {
@@ -68,7 +77,7 @@ const ItemDetails = () => {
     return <div className="p-10 text-center text-red-600">{error}</div>;
 
   return (
-    <div className="w-[100%] h-[100vh] flex justify-center items-center relative top-[65px]">
+    <div className="w-[100%] h-[100vh] flex justify-center items-center relative top-[45px]">
       <div className="p-8 w-[90%] h-[80vh] rounded-[15px] bg-gray-50  ">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-10">
           {/* Previews */}
@@ -79,16 +88,16 @@ const ItemDetails = () => {
           </div>
 
           {/* Main Image */}
-          <div className="flex relative right-[200px] justify-center items-center">
-            <img src={item.bgImg} alt={item.title} className="w-full rounded-md shadow-md" />
+          <div className="flex relative right-[200px]  justify-center items-center">
+            <img src={item.bgImg} alt={item.title} className="w-full h-[550px] rounded-md shadow-md" />
           </div>
 
           {/* Info Section */}
-          <div className="w-[600px] flex flex-col justify-center  relative right-[200px] bg-black">
-            <h2 className="text-4xl absolute top-[15px] bg-black font-bold">{item.title}</h2>
+          <div className="w-[600px] flex flex-col justify-center  relative right-[200px]">
+            <h2 className="text-4xl absolute top-[15px]  desc font-bold">{item.title}</h2>
 
             <div className="text-lg space-y-2 absolute top-[70px]">
-              <p className="text-gray-500 ">Price :- ${item.price}</p>
+              <p className="desc "><span className="font-semibold desc inline">Price</span> :- ${item.price}</p>
               {/* {item.discount > 0 && (
                 <>
                   <p className=" font-semibold">
@@ -102,20 +111,20 @@ const ItemDetails = () => {
             </div>
 
             <div className="absolute top-[110px]">
-              <h4 className="text-lg font-semibold mb-1">Details</h4>
-              <p className="text-gray-700">{item.description}</p>
+              <h4 className=" desc text-lg font-semibold mb-1">Details</h4>
+              <p className="desc">{item.description}</p>
             </div>
 
             <div className="absolute top-[250px]">
-              <h4 className="text-lg font-semibold mb-2">Size</h4>
+              <h4 className="text-lg desc font-semibold mb-2">Size</h4>
               <div className="flex gap-3  absolute ">
                 {sizes.map((size) => (
                   <button
                     key={size.id}
                     onClick={() => handleSizeChange(size.id)}
                     className={`px-4 relative top-[10px] w-[60px] h-[60px] py-2 rounded-full border ${size.active
-                        ? "bg-blue-600 text-white border-blue-600"
-                        : "bg-white text-gray-600 border-gray-400"
+                      ? "bg-white text-black  border-black"
+                      : "bg-black text-white border-white"
                       }`}
                   >
                     {size.name}
@@ -125,18 +134,18 @@ const ItemDetails = () => {
             </div>
 
             <div className="absolute bottom-[150px]" >
-              <h4 className="text-lg font-semibold mb-2">Quantity</h4>
+              <h4 className="text-lg desc font-semibold mb-2">Quantity</h4>
               <div className="flex items-center gap-4">
                 <button
                   onClick={decQty}
-                  className="bg-gray-300 w-[30px] h-[30px] hover:bg-gray-400 text-lg px-3 py-1 rounded"
+                  className="bg-black text-white w-[30px] h-[30px] hover:bg-gray-400 text-lg px-3 py-1 rounded"
                 >
                   −
                 </button>
-                <span className="text-xl text-gray-400">{qty}</span>
+                <span className="text-xl desc text-gray-400">{qty}</span>
                 <button
                   onClick={incQty}
-                  className="bg-gray-300 w-[30px] h-[30px] hover:bg-gray-400 text-lg px-3 py-1 rounded"
+                  className="bg-black w-[30px] text-white h-[30px] hover:bg-gray-400 text-lg px-3 py-1 rounded"
                 >
                   +
                 </button>
@@ -144,8 +153,8 @@ const ItemDetails = () => {
             </div>
 
             <button
-              onClick={handleAddToBag}
-              className="mt-4 absolute bottom-[70px] w-[200px] h-[40px] px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
+              onClick={() =>  handleAddToBag(itemAdded) }
+              className="mt-4 absolute bottom-[70px] w-[200px] h-[40px] px-6 py-2 bg-black text-white hover:text-black hover:border rounded-md hover:bg-white transition"
             >
               Add to Bag
             </button>

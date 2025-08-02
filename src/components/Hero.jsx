@@ -7,7 +7,7 @@ import { IoCartOutline } from 'react-icons/io5'
 import HeroSwiper from './HeroSwiper'
 import { Link } from 'react-router'
 const Hero = () => {
-  const { getData, setGetData } = useContext(AppContext)
+  const { getData, setGetData, collection, setCollection } = useContext(AppContext)
 
   const handleSlideChange = _id => {
     // console.log(id)
@@ -21,11 +21,20 @@ const Hero = () => {
     })
     setGetData(newItems)
   }
+
+  const handleAddToCollection = prod => {
+    setCollection([...collection, prod])
+  }
+
+  const handleRemoveFromCollection = prod => {
+    setCollection(collection.filter(item => item._id !== prod._id))
+  }
+
   return (
     <div className="banner">
       {getData && getData.map(item => {
         return (
-          item.active && ( 
+          item.active && (
             <div key={item._id} className="item">
               <img src={item.bgImg} alt="" className="bgImg active" />
               <div className="content active">
@@ -35,9 +44,16 @@ const Hero = () => {
                 <Link to={`/items/${item._id}`} className="mainButton">
                   <p>Shop Now</p> <i><IoCartOutline /></i>
                 </Link>
-                <a href="#" className="markButton">
+                {/* <a href="#" className="markButton">
                   <i><BsBookmarkPlusFill /></i>
-                </a>
+                </a> */}
+                <Link className={`markButton ${collection.includes(item) ? 'active' : undefined}`}
+                  onClick={collection.includes(item) ? () => handleRemoveFromCollection(item) :
+                   () => handleAddToCollection(item)
+
+                  } >
+                     <i><BsBookmarkPlusFill /></i>
+                  </Link>
               </div>
 
               <div className="subtitle">

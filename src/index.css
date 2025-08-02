@@ -26,3 +26,6 @@ body{
 body::-webkit-scrollbar{
   display: none;
 }
+.desc{
+  color: black;
+}

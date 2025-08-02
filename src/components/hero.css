@@ -4,7 +4,7 @@
     min-height: 100vh;
     overflow: hidden;
     padding: 0 100px;
-    transition: 0.5s;
+    transition: 2s;
 }
 
 .banner::after {
@@ -45,7 +45,7 @@
     opacity: 0;
     /* display: none; */
     transform: scale(0);
-    transition: 1s;
+    transition: 2s;
 }
 
 .bgImg.active {
